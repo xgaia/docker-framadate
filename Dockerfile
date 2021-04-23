@@ -14,6 +14,7 @@ RUN set -x && \
     rm -rf /var/lib/apt/lists/* && \
     docker-php-ext-configure intl && \
     docker-php-ext-install intl && \
+    docker-php-ext-install mysqli pdo pdo_mysql && \
     a2enmod rewrite && \
     curl ${DOWNLOAD_URL} -o framadate.zip && \
     unzip framadate.zip && \
