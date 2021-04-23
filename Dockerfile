@@ -8,8 +8,6 @@ ENV ADMIN_PASSWORD=admin
 
 COPY apache.conf /apache.conf
 COPY php.ini /usr/local/etc/php/conf.d/framadate-php.ini
-COPY .htaccess /usr/local/framadate/.htaccess
-COPY .htaccess_admin /usr/local/framadate/admin/.htaccess
 
 RUN set -x && \
     apt-get update && \
@@ -25,6 +23,10 @@ RUN set -x && \
     chown -R www-data:www-data /usr/local/framadate && chmod 750 -R /usr/local/framadate && \
     cat /apache.conf | envsubst > /etc/apache2/sites-available/framadate.conf && \
     a2ensite framadate
+
+WORKDIR /usr/local/framadate
+COPY .htaccess /usr/local/framadate/.htaccess
+COPY .htaccess_admin /usr/local/framadate/admin/.htaccess
 
 CMD htpasswd -bc /usr/local/framadate/admin/.htpasswd admin ${ADMIN_PASSWORD} && \
     envsubst < /apache.conf > /etc/apache2/sites-available/framadate.conf && \
