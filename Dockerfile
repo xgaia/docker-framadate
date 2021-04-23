@@ -4,9 +4,12 @@ MAINTAINER "Xavier Garnier"
 ENV VERSION=1.1.16
 ENV DOWNLOAD_URL=https://framagit.org/framasoft/framadate/framadate/uploads/3509507f6cf95e7b8e35ea9531bfea75/framadate-1.1.16.zip
 ENV SERVERNAME=localhost
+ENV ADMIN_PASSWORD=admin
 
 COPY apache.conf /apache.conf
 COPY php.ini /usr/local/etc/php/conf.d/framadate-php.ini
+COPY .htaccess /usr/local/framadate/.htaccess
+COPY .htaccess_admin /usr/local/framadate/admin/.htaccess
 
 RUN set -x && \
     apt-get update && \
@@ -23,4 +26,6 @@ RUN set -x && \
     cat /apache.conf | envsubst > /etc/apache2/sites-available/framadate.conf && \
     a2ensite framadate
 
-CMD envsubst < /apache.conf > /etc/apache2/sites-available/framadate.conf && apache2-foreground
+CMD htpasswd -bc /usr/local/framadate/admin/.htpasswd admin ${ADMIN_PASSWORD} && \
+    envsubst < /apache.conf > /etc/apache2/sites-available/framadate.conf && \
+    apache2-foreground

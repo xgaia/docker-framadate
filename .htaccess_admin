@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Administration"
+AuthUserFile "/usr/local/framadate/admin/.htpasswd"
+Require valid-user
