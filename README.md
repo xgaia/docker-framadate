@@ -6,6 +6,8 @@ A Dockerfile for [Framadate](https://framagit.org/framasoft/framadate).
 
 ```bash
 docker exec -d \
+            -e SERVERNAME: localhost \
+            -e ADMIN_PASSWORD: admin \
             -e APP_NAME=Framadate \
             -e EMAIL_ADRESS=noreply@example.org \
             -e DB_HOST=db \
@@ -28,3 +30,7 @@ docker exec -d \
             -p 8080:80 \
             xgaia/framadate
 ```
+
+## Configure
+
+Go to [localhost:8080/admin](http://localhost:8080/admin) and run database migration.
