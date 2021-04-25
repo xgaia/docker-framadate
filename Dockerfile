@@ -27,6 +27,9 @@ ENV USER_CAN_ADD_IMG_OR_LINK=true
 ENV MARKDOWN_EDITOR_BY_DEFAULT=true
 ENV PROVIDE_FORK_AWESOME=true
 
+ENV ALLOWED_LANGUAGES=\$ALLOWED_LANGUAGES
+ENV config=\$config
+
 COPY apache.conf /apache.conf
 COPY config.php /config.php
 COPY php.ini /usr/local/etc/php/conf.d/framadate-php.ini
@@ -53,4 +56,5 @@ COPY .htaccess_admin /usr/local/framadate/admin/.htaccess
 CMD htpasswd -bc /usr/local/framadate/admin/.htpasswd admin ${ADMIN_PASSWORD} && \
     envsubst < /apache.conf > /etc/apache2/sites-available/framadate.conf && \
     envsubst < /config.php > /usr/local/framadate/app/inc/config.php && \
+    chown -R www-data:www-data /usr/local/framadate && chmod 750 -R /usr/local/framadate && \
     apache2-foreground
