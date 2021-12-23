@@ -1,8 +1,8 @@
 FROM php:7.3-apache
 MAINTAINER "Xavier Garnier"
 
-ENV VERSION=1.1.17
-ENV DOWNLOAD_URL=https://framagit.org/framasoft/framadate/framadate/uploads/a24ea0c98490f15d65c2b75242c8c40e/framadate-1.1.17.zip
+ENV VERSION=1.1.18
+ENV DOWNLOAD_URL=https://packages.framasoft.org/projects/framadate/framadate-1.1.18.zip
 ENV SERVERNAME=localhost
 ENV ADMIN_PASSWORD=admin
 
