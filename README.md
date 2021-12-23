@@ -1,4 +1,6 @@
 # Docker Framadate
+![Docker](https://github.com/xgaia/docker-framadate/actions/workflows/docker-publish.yml/badge.svg)
+
 
 A Dockerfile for [Framadate](https://framagit.org/framasoft/framadate).
 
